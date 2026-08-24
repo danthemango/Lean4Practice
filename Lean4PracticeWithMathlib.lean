@@ -56,13 +56,6 @@ example (P Q T U: Prop) (p : P) (h1 : P → Q) (h3 : Q → T) (h5 : T → U) : U
 -- example (P Q T U: Prop) (p : P) (h1 : P → Q) (h3 : Q → T) (h5 : T → U) : U := by
 --     exact (h₁ ≫ h₃ ≫ h₅) p
 
-theorem and_intro : P -> Q -> P ∧ Q := by
-    intro h1
-    intro h2
-    constructor
-    assumption
-    assumption
-
 example (C D S: Prop) (h : C ∧ D → S) : C → D → S := by
     exact λ hl1 => λ hl2 => h (and_intro hl1 hl2)
 
