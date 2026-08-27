@@ -81,8 +81,19 @@ example (A P : Prop) (h : P → ¬A) : ¬(P ∧ A) := by
 
 -- Conjunction Implication
 example (A P : Prop) (h: ¬(P ∧ A)) : P → ¬A := by
-  sorry
+  -- (P → ¬A) ↔ (¬P ∨ ¬A) ↔ ¬(¬P ∨ ¬A) ↔ ¬(P ∧ A)
+  have h4 : ¬(P ∧ A) → (P ∧ A) → False := λ h => h
+  have h3 : ¬(P ∧ A) → P → A → False := λ npa => λ hp => λ ha => (h4 h) (and_intro hp ha)
+  exact h3 h
 
+-- ¬A is stable.
+example (A : Prop)(h : ¬¬¬A) : ¬A := by
+  have h1 : ¬¬¬A → ¬¬A → False := λ h => h
+  have h2 : ¬(¬¬¬A ∧ ¬¬A) := λ nnna_nna => (h1 nnna_nna.left) nnna_nna.right
+  have h4 : (¬¬¬A ∧ ¬¬A) → ¬A := λ nnna_nna => false_elim (h2 (nnna_nna))
+  have h3 : ¬¬A → A → False := λ nna => h4 (and_intro h nna)
+  -- have h5 : ¬(¬¬¬A ∧ ¬¬A) → ¬¬¬A → ¬A := λ n_nnna_nna => λ nnna =>
+  sorry
 
 example (C S : Prop) (s: S) : S ∨ C := by
   sorry
