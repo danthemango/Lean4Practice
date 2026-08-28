@@ -31,3 +31,12 @@ theorem or_elim {P Q R} (h : P ∨ Q) (_ : P → R) (_ : Q → R)
 example (B C I : Prop)(h1 : C → B)(h2 : I → B)(h3 : C ∨ I) : B := by
   -- exact or_elim h3 h1 h2
   sorry
+
+-- Implication across ∨
+example (C J R : Prop)(h1 : C → J)(h2 : C ∨ R) : J ∨ R := by
+  have h3 : C → J → R → (J ∨ R) := λ hl1 => λ j => λ r => or_inl j
+  have h4 : J → (C ∨ R) ∨ J := λ hj => or_inr hj
+  have h5 : C → (C ∨ R) ∨ J := λ hc => or_inr (h1 hc)
+  have h6 : C → C ∨ R ∨ J := λ hc => or_assoc.mp (h5 hc)
+
+  sorry
