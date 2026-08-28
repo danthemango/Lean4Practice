@@ -93,10 +93,43 @@ example (A : Prop)(h : ¬¬¬A) : ¬A := by
   have h4 : (¬¬¬A ∧ ¬¬A) → ¬A := λ nnna_nna => false_elim (h2 (nnna_nna))
   have h3 : ¬¬A → A → False := λ nna => h4 (and_intro h nna)
   -- have h5 : ¬(¬¬¬A ∧ ¬¬A) → ¬¬¬A → ¬A := λ n_nnna_nna => λ nnna =>
+  have h6 : ¬¬¬A ∧ ¬A :=
   sorry
 
-example (C S : Prop) (s: S) : S ∨ C := by
+-- A is stable 1
+example (A : Prop)(h : A) : ¬¬A := by
+  have h2 : (A → False) → False := λ haif => haif h
+  have h3 : (A → False) → False := h2
+  have h4 : ¬A → False := h2
+  have h5 : A → ¬¬A := by sorry
+  exact h5 h
+
+-- A is stable 2
+example (A : Prop) (h : ¬¬A) : A := by
+  have h2 : (A → False) → False := λ haif => h haif
+  have h5 : (¬¬A → A) → ¬¬A → A := λ h => h
+  have h7 : (¬¬A ∧ A) → A := λ nna_ha => nna_ha.right
+
+  have h8 : ¬¬A → A := by sorry
+  have h9 : (¬A → False) → A := by sorry
+  have h10 : ((A → False) → False) → A := by sorry
+  have h11 : ((A → False) → False) := h
+  have h12 : (A → False) → False := h
+
+  have h3 : ¬A → False := h2
+
+  -- have h4 : (¬¬A → A) → (¬¬A ∧ A) := λ nna_na => λ nna => nna_na.right
+  -- have h6 : (¬¬A ∧ ¬A) → False := λ nna_na => (h4 nna_na) nna_na.right
   sorry
 
+-- ¬Intro Boss
+-- ¬¬"You bought this cake"
+example (B C : Prop) (h : ¬(B → C)) : ¬¬B := by
+  have h1 : (B → C) → False := h
+  have h2 : ((B → False) → False) → ¬¬B := λ h => h
+  -- have h3 : (¬B → False) → ¬¬B := h2
+  -- have h4 : ¬¬B → ¬¬B := h2
+  -- have h5 :
+  sorry
 
 -- TODO more problems incompleted
