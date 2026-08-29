@@ -30,7 +30,14 @@ theorem one_ne_zero : (1 : Nat) ≠ 0 := by
 
 -- 2+2  =5.
 example : Nat.succ (Nat.succ 0) + Nat.succ (Nat.succ 0) ≠ Nat.succ (Nat.succ (Nat.succ (Nat.succ (Nat.succ 0)))) := by
-  intro h
-  -- rw [succ_inj] at h
-
+  -- rw [add_succ]
+  -- rw [add_succ]
+  -- rw [add_zero]
+  -- intro h
+  -- apply succ_inj at h
+  -- apply succ_inj at h
+  -- apply succ_inj at h
+  -- apply succ_inj at h
+  -- apply zero_ne_succ 0
+  -- exact h
   sorry
