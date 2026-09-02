@@ -33,4 +33,28 @@ example (P Q R: Prop) (h : P ∧ Q → R) : P → Q → R := by
 
 -- try it without cases, exact, or have
 example (P Q R: Prop) (h : P ∧ Q → R) : P → Q → R := by
+  intro hp
+  intro hq
+  apply h
+  constructor
+  repeat assumption
+
+example (P Q R: Prop) (h : P → Q → R) : P ∧ Q → R := by
+  intro hpq
+  apply h
+  cases hpq
+  assumption
+  cases hpq
+  assumption
+
+-- using only apply, assumption, cases, constructor, intro
+example (P Q R : Prop) (h : (P → Q) ∧ (P → R)) : P → Q ∧ R := by
+  intro hp
+
+  sorry
+
+-- boss
+example (P Q : Prop) : Q → (P → Q) ∧ (¬P → Q) := by
+  intro hq
+
   sorry
