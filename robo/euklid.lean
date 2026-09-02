@@ -1,0 +1,32 @@
+import Lean4PracticeWithMathlib.Basic
+
+-- I can't use ∏ for some reason
+-- example (A : Finset Nat) (h : ∀ a ∈ A, Prime a) : 0 < (∏ a ∈ A, a) := by
+  -- apply prod_pos
+  -- intro i
+  -- specialize h i
+  -- intro h2
+  -- apply h at h2
+  -- rw [prime_def] at h2
+  -- obtain ⟨ h3, h4 ⟩ := h2
+  -- omega
+--   sorry
+
+-- example (b : ℕ) (A : Finset ℕ): (∃ a ∈ A, b ∣ a) → b ∣ ∏ a ∈ A, a := by
+--   intro h1
+--   choose a ha using h1
+--   obtain ⟨ h2, h3 ⟩ := ha
+--   apply insert_erase at h2
+--   rw [← h2]
+--   rw [prod_insert]
+--   -- rw [dvd_iff_exists_eq_mul_left]
+--   -- use a
+--   rw [dvd_iff_exists_eq_mul_left] at h3
+--   rw [dvd_iff_exists_eq_mul_left]
+--   obtain ⟨d, hd⟩ := h3
+--   use d * (∏ x ∈ A.erase a, x)
+--   rw [mul_comm (d * ∏ x ∈ A.erase a, x) b]
+--   rw [← mul_assoc]
+--   rw [mul_comm b d]
+--   rw [← hd]
+--   simp
