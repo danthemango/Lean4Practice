@@ -1,0 +1,11 @@
+-- theorem le_zero (x : ℕ) (hx : x ≤ 0) : x = 0 := by
+cases hx with c hc
+symm at hc
+induction c with c hc2
+rw [add_zero] at hc
+exact hc
+apply hc2
+rw [add_succ] at hc
+symm at hc
+apply zero_ne_succ at hc
+cases hc
