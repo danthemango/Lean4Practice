@@ -1,0 +1,19 @@
+-- theorem pow_pow (a m n : ℕ) : (a ^ m) ^ n = a ^ (m * n) := by
+induction n with n hn
+rw [pow_zero, mul_zero, pow_zero]
+rfl
+rw [pow_succ, mul_succ, pow_add, hn]
+rfl
+
+-- theorem add_sq (a b : ℕ) : (a + b) ^ 2 = a ^ 2 + b ^ 2 + 2 * a * b := by
+induction b with b hb
+rw [mul_zero, add_zero, add_zero]
+nth_rewrite 3 [two_eq_succ_one]
+rw [zero_pow_succ, add_zero]
+rfl
+rw [pow_two, mul_add, add_mul, add_mul, ← add_assoc, ← pow_two a, mul_comm (succ b) a]
+nth_rewrite 3 [add_comm]
+nth_rewrite 2 [add_comm]
+rw [← add_assoc, ← two_mul (a*succ b), ← mul_assoc]
+rw [add_comm, ← pow_two, add_comm, add_comm, ← add_assoc, add_comm, ← add_assoc]
+rfl
